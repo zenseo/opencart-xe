@@ -16,6 +16,11 @@ These instructions are for a manual installation using FTP, cPanel or other web 
 
 - Linux Install -
 
+via terminal
+Log in to your linux server terminal
+1. run pre-install.sh (you may have to sudo)
+
+no terminal
 1. Upload all of the files and folders to your server from the "Upload" folder, place them in your web root. The web root is different on some servers, cPanel it should be public_html/ and on Plesk it should be httpdocs/.
 
 2. Rename config-dist.php to config.php and admin/config-dist.php to admin/config.php

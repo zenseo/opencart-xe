@@ -1,54 +1,17 @@
-# OpenCart
+opencart-xe
+===========
 
+OpenCart Xtended Edition is an unofficial fork that adds commonly used features/modules in a single package.
 
-## Overview
+## Contribution Guidelines
 
-OpenCart is a free open source ecommerce platform for online merchants. OpenCart provides a professional and reliable foundation from which to build a successful online store.
-
-## Reporting a bug
-	
-Read the instructions below before you create a bug report.
- 
- 1. Search the [OpenCart forum](http://forum.opencart.com/viewforum.php?f=161), ask the community if they have seen the bug or know how to fix it.
- 2. Check all open and closed issues on the [GitHub bug tracker](https://github.com/opencart/opencart/issues).
- 3. If your bug is related to the OpenCart core code then please create a bug report on GitHub.
- 4. READ the [changelog for the master branch](https://github.com/opencart/opencart/blob/master/changelog.md)
- 5. Use [Google](http://www.google.com) to search for your issue.
- 6. Make sure that your bug/issue is not related to your hosting environment.
- 
-If you are not sure about your issue, it is always best to ask the community on our [bug forum thread](http://forum.opencart.com/viewforum.php?f=161&sid=f5208eb3888b13a5065be051362daa0d)
-
-**Important!**
-- If your bug report is not related to the core code (such as a 3rd party module or your server configuration) then the issue will be closed without a reason. You must contact the extension developer, use the forum or find a commercial partner to resolve a 3rd party code issue.
-- If you would like to report a serious security bug please PM an OpenCart moderator/administrator on the forum. Please do not report concept/ideas/unproven security flaws - all security reports are taken seriously but you must include the EXACT details steps to reproduce it. Please DO NOT post security flaws in a public location.
-
-## Making a suggestion
-
-Please do not create a bug report if you think something needs improving / adding (such as features or change to code standards etc).
-
-We welcome public suggestions on our [User Voice site](http://opencart.uservoice.com). 
-
-## How to contribute
-
-Fork the repository, edit and [submit a pull request](https://github.com/opencart/opencart/wiki/Creating-a-pull-request).
-
-Please be very clear on your commit messages and pull request, empty pull request messages may be rejected without reason.
-
-Your code standards should match the [OpenCart coding standards](https://github.com/opencart/opencart/wiki/Coding-standards). We use an automated code scanner to check for most basic mistakes - if the test fails your pull request will be rejected.
-
-## How to install
-
-Please read the installation instructions included in the repository.
-
-## License
-
-[GNU General Public License version 3 (GPLv3)](https://github.com/opencart/opencart/blob/master/license.txt)
-
-## Links
-
-- [OpenCart homepage](http://www.opencart.com/)
-- [OpenCart forums](http://forum.opencart.com/)
-- [OpenCart blog](http://www.opencart.com/index.php?route=feature/blog)
-- [How to documents](http://docs.opencart.com/)
-- [Newsletter](http://newsletter.opencart.com/h/r/B660EBBE4980C85C)
-- [User Voice suggestions](http://opencart.uservoice.com)
+ 1. The OpenCart Xtended Edition GitHub repository is for submitting bug reports and bug fixes.  If you need assistance troubleshooting an issue with OpenCart please use the official community support forums at [forum.opencart.com](http://forum.opencart.com).
+ 2. When submitting a bug report please include your OpenCart version, relevant environment info, and a step-by-step process on how to create the error or the relevant line of code which causes it.  If you are unsure if an issue is a bug please post in the community support forum for assistance.
+ 3. When submitting a pull request leave a description of the changes so the repository maintainers can more efficiently review the code.  A pull request should only cover one issue, preferably with a single commit.
+ 4. Follow the existing syntax and styling used in OpenCart for all pull requests.  This helps keep code clean and readable.  You may be asked to resubmit a pull request if standard styling is not followed. 
+ 5. Attempt to keep changes as minimal as possible.  Significant changes to code risk causing compatibility issues with third-party mods.
+ 6. Significant code changes which may impact third-party mods or themes should be discussed before inclusion.
+ 7. If a bug is fixed in the official OpenCart repository with minimal changes that method is preferred in Xtended Edition.
+ 8. If applicable submit a bug report or fix to the [opencart/opencart core](https://github.com/opencart/opencart).
+ 9. Only submit code that you have the rights to or that is released under GPL.  Code from commercial mods or mods not explicitly released under GPL is prohibited.
+ 10. Pull requests and bug reports that are closed without action will include a statement why.  Feel free to advocate for re-opening the issue but please note the decision may not be reversed.  Remember, closing an issue is not meant as a personal attack against you.  It's about what's best for the project.
