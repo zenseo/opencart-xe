@@ -9,6 +9,13 @@ class Pagination {
 	public $text_last = '&gt;|';
 	public $text_next = '&gt;';
 	public $text_prev = '&lt;';
+        
+        public function __construct($total = 0, $page = 1,$limit = 20,$url = '') {
+        $this->total = $total;
+        $this->page = $page;
+        $this->limit = $limit;
+        $this->url = $url;
+    }
 
 	public function render() {
 		$total = $this->total;

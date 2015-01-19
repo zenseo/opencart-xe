@@ -16,6 +16,7 @@ if (!defined('DIR_APPLICATION')) {
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 
+
 // Registry
 $registry = new Registry();
 
@@ -38,75 +39,6 @@ foreach ($query->rows as $setting) {
 	}
 }
 
-// Loader
-$loader = new Loader($registry);
-$registry->set('load', $loader);
-
-// Url
-$url = new Url(HTTP_SERVER, $config->get('config_secure') ? HTTPS_SERVER : HTTP_SERVER);
-$registry->set('url', $url);
-
-// Log
-$log = new Log($config->get('config_error_filename'));
-$registry->set('log', $log);
-
-function error_handler($errno, $errstr, $errfile, $errline) {
-	global $log, $config;
-
-	// error suppressed with @
-	if (error_reporting() === 0) {
-		return false;
-	}
-
-	switch ($errno) {
-		case E_NOTICE:
-		case E_USER_NOTICE:
-			$error = 'Notice';
-			break;
-		case E_WARNING:
-		case E_USER_WARNING:
-			$error = 'Warning';
-			break;
-		case E_ERROR:
-		case E_USER_ERROR:
-			$error = 'Fatal Error';
-			break;
-		default:
-			$error = 'Unknown';
-			break;
-	}
-
-	if ($config->get('config_error_display')) {
-		echo '<b>' . $error . '</b>: ' . $errstr . ' in <b>' . $errfile . '</b> on line <b>' . $errline . '</b>';
-	}
-
-	if ($config->get('config_error_log')) {
-		$log->write('PHP ' . $error . ':  ' . $errstr . ' in ' . $errfile . ' on line ' . $errline);
-	}
-
-	return true;
-}
-
-// Error Handler
-set_error_handler('error_handler');
-
-// Request
-$request = new Request();
-$registry->set('request', $request);
-
-// Response
-$response = new Response();
-$response->addHeader('Content-Type: text/html; charset=utf-8');
-$registry->set('response', $response);
-
-// Cache
-$cache = new Cache('file');
-$registry->set('cache', $cache);
-
-// Session
-$session = new Session();
-$registry->set('session', $session);
-
 // Language
 $languages = array();
 
@@ -124,7 +56,39 @@ $language->load($languages[$config->get('config_admin_language')]['directory']);
 $registry->set('language', $language);
 
 // Document
-$registry->set('document', new Document());
+$document = new Document();
+$registry->set('document', $document );
+
+// Request
+$request = new Request();
+$registry->set('request', $request);
+
+
+// Log
+$log = new Log($config->get('config_error_filename'));
+$registry->set('log', $log);
+
+// Url
+$url = new Url(HTTP_SERVER, $config->get('config_secure') ? HTTPS_SERVER : HTTP_SERVER,$request);
+$registry->set('url', $url);
+
+// Filter
+$filter = new Filter($request);
+$registry->set('filter', $filter);
+
+
+// Response
+$response = new Response();
+$response->addHeader('Content-Type: text/html; charset=utf-8');
+$registry->set('response', $response);
+
+// Cache
+$cache = new Cache('file');
+$registry->set('cache', $cache);
+
+// Session
+$session = new Session();
+$registry->set('session', $session);
 
 // Currency
 $registry->set('currency', new Currency($registry));
@@ -138,8 +102,6 @@ $registry->set('length', new Length($registry));
 // User
 $registry->set('user', new User($registry));
 
-//OpenBay Pro
-$registry->set('openbay', new Openbay($registry));
 
 // Event
 $event = new Event($registry);
@@ -150,6 +112,10 @@ $query = $db->query("SELECT * FROM " . DB_PREFIX . "event");
 foreach ($query->rows as $result) {
 	$event->register($result['trigger'], $result['action']);
 }
+
+// Loader
+$loader = new Loader($registry);
+$registry->set('load', $loader);
 
 // Front Controller
 $controller = new Front($registry);
@@ -166,6 +132,7 @@ if (isset($request->get['route'])) {
 } else {
 	$action = new Action('common/dashboard');
 }
+
 
 // Dispatch
 $controller->dispatch($action, new Action('error/not_found'));

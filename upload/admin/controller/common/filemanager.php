@@ -1,8 +1,9 @@
 <?php
 class ControllerCommonFileManager extends Controller {
 	public function index() {
-		$this->load->language('common/filemanager');
-
+		
+                $language[]="common/filemanager";
+                
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = rtrim(str_replace(array('../', '..\\', '..', '*'), '', $this->request->get['filter_name']), '/');
 		} else {
@@ -55,13 +56,7 @@ class ControllerCommonFileManager extends Controller {
 			if (is_dir($image)) {
 				$url = '';
 
-				if (isset($this->request->get['target'])) {
-					$url .= '&target=' . $this->request->get['target'];
-				}
-
-				if (isset($this->request->get['thumb'])) {
-					$url .= '&thumb=' . $this->request->get['thumb'];
-				}
+				
 
 				$data['images'][] = array(
 					'thumb' => '',
@@ -88,20 +83,7 @@ class ControllerCommonFileManager extends Controller {
 			}
 		}
 
-		$data['heading_title'] = $this->language->get('heading_title');
-
-		$data['text_no_results'] = $this->language->get('text_no_results');
-		$data['text_confirm'] = $this->language->get('text_confirm');
-
-		$data['entry_search'] = $this->language->get('entry_search');
-		$data['entry_folder'] = $this->language->get('entry_folder');
-
-		$data['button_parent'] = $this->language->get('button_parent');
-		$data['button_refresh'] = $this->language->get('button_refresh');
-		$data['button_upload'] = $this->language->get('button_upload');
-		$data['button_folder'] = $this->language->get('button_folder');
-		$data['button_delete'] = $this->language->get('button_delete');
-		$data['button_search'] = $this->language->get('button_search');
+		
 
 		$data['token'] = $this->session->data['token'];
 
@@ -155,37 +137,13 @@ class ControllerCommonFileManager extends Controller {
 		// Refresh
 		$url = '';
 
-		if (isset($this->request->get['directory'])) {
-			$url .= '&directory=' . urlencode($this->request->get['directory']);
-		}
-
-		if (isset($this->request->get['target'])) {
-			$url .= '&target=' . $this->request->get['target'];
-		}
-
-		if (isset($this->request->get['thumb'])) {
-			$url .= '&thumb=' . $this->request->get['thumb'];
-		}
+		
 
 		$data['refresh'] = $this->url->link('common/filemanager', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		$url = '';
 
-		if (isset($this->request->get['directory'])) {
-			$url .= '&directory=' . urlencode(html_entity_decode($this->request->get['directory'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
-		}
-
-		if (isset($this->request->get['target'])) {
-			$url .= '&target=' . $this->request->get['target'];
-		}
-
-		if (isset($this->request->get['thumb'])) {
-			$url .= '&thumb=' . $this->request->get['thumb'];
-		}
+		
 
 		$pagination = new Pagination();
 		$pagination->total = $image_total;
@@ -195,7 +153,7 @@ class ControllerCommonFileManager extends Controller {
 
 		$data['pagination'] = $pagination->render();
 
-		$this->response->setOutput($this->load->view('common/filemanager.tpl', $data));
+		$this->response->setOutput($this->load->view('common/filemanager.tpl', $data, $language));
 	}
 
 	public function upload() {

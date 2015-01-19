@@ -1,16 +1,7 @@
 <?php
 class ControllerCommonDashboard extends Controller {
 	public function index() {
-		$this->load->language('common/dashboard');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		$data['heading_title'] = $this->language->get('heading_title');
-
-		$data['text_sale'] = $this->language->get('text_sale');
-		$data['text_map'] = $this->language->get('text_map');
-		$data['text_activity'] = $this->language->get('text_activity');
-		$data['text_recent'] = $this->language->get('text_recent');
+		
 
 		$data['breadcrumbs'] = array();
 
@@ -51,7 +42,7 @@ class ControllerCommonDashboard extends Controller {
 
 			$this->model_localisation_currency->refresh();
 		}
-			
-		$this->response->setOutput($this->load->view('common/dashboard.tpl', $data));
+		$language[]="common/dashboard";
+		$this->response->setOutput($this->load->view('common/dashboard.tpl', $data, $language));
 	}
 }

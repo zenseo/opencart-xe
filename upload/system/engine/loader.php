@@ -1,8 +1,9 @@
 <?php
 final class Loader {
 	private $registry;
-
-	public function __construct($registry) {
+	
+	
+	public function __construct($registry=null) {
 		$this->registry = $registry;
 	}
 
@@ -26,9 +27,24 @@ final class Loader {
 		}
 	}
 
-	public function view($template, $data = array()) {
+	public function view($template, $data = array(), $languages=array()) {
+           
+            foreach($languages as $language){
+              $language = $this->registry->get('language')->load($language);
+              $data = array_merge($data,$language);
+              
+            }
+          // d($data);
+           if(!isset($data['heading_title'])){
+               $data['heading_title'] ='';
+           }
+                $document=$this->registry->get('document');
+                $document->setTitle($data['heading_title']);
+                
 		$file = DIR_TEMPLATE . $template;
-
+                
+                
+                
 		if (file_exists($file)) {
 			extract($data);
 
@@ -45,6 +61,7 @@ final class Loader {
 			trigger_error('Error: Could not load template ' . $file . '!');
 			exit();
 		}
+                
 	}
 
 	public function library($library) {

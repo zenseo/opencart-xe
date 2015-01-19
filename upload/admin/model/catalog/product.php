@@ -402,7 +402,8 @@ class ModelCatalogProduct extends Model {
 
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
-
+             //  d($sql);
+//                var_dump($data);
 		$query = $this->db->query($sql);
 
 		return $query->rows;

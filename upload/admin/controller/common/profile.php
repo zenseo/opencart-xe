@@ -1,8 +1,7 @@
 <?php
 class ControllerCommonProfile extends Controller {
 	public function index() {
-		$this->load->language('common/menu');
-
+		
 		$this->load->model('user/user');
 
 		$this->load->model('tool/image');
@@ -25,7 +24,7 @@ class ControllerCommonProfile extends Controller {
 			$data['username'] = '';
 			$data['image'] = '';
 		}
-
-		return $this->load->view('common/profile.tpl', $data);
+                $language[]="common/menu";
+		return $this->load->view('common/profile.tpl', $data, $language);
 	}
 }
